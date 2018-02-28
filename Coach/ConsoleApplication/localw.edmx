@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="localdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="allowance_summary">
+          <Key>
+            <PropertyRef Name="PERSON_ID" />
+          </Key>
+          <Property Name="PERSON_ID" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="PAY_CODE" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="PAY_CODE_DESC" Type="char" MaxLength="50" />
+          <Property Name="AMT" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="START_DATE" Type="date" Nullable="false" />
+          <Property Name="CURRENCY_CODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="END_DATE" Type="date" Nullable="false" />
+          <Property Name="FREQUENCY" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IS_ONCE" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mail_configuration">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CODE" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SmtpHost" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SmtpPort" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailPass" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payroll_mapping">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PAY_CODE" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="PAY_CODE_DESC" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personnel_info">
+          <Key>
+            <PropertyRef Name="PERSON_ID" />
+          </Key>
+          <Property Name="PERSON_ID" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="LAST_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="MIDDLE_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="CHINESE_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="ALIAS_NAME" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="PERS_MOBILE" Type="varchar(max)" Nullable="false" />
+          <Property Name="COMPANY" Type="char" MaxLength="90" Nullable="false" />
+          <Property Name="PERS_EMAIL" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="NATIONAL_ID" Type="char" MaxLength="16" Nullable="false" />
+          <Property Name="LASTEST_HIRE_DATE" Type="datetime" Nullable="false" />
+          <Property Name="SAL_AMT" Type="float" Nullable="false" />
+          <Property Name="POSITION_TITLE" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="WORK_LOCATION" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="COST_CENTER" Type="char" MaxLength="10" />
+          <Property Name="ACTION" Type="char" MaxLength="5" />
+          <Property Name="LAST_EMP_DATE" Type="datetime" Nullable="false" />
+          <Property Name="TERM_REASON" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="STATUS" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="WORKER_TYPE" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="salary_change">
+          <Key>
+            <PropertyRef Name="PERSON_ID" />
+          </Key>
+          <Property Name="PERSON_ID" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="LAST_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="MIDDLE_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="CHINESE_NAME" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="ALIAS_NAME" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="NATIONAL_ID" Type="char" MaxLength="16" Nullable="false" />
+          <Property Name="COMPANY" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="SAL_START_DATE" Type="datetime" Nullable="false" />
+          <Property Name="SAL_AMT" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="localdbModelStoreContainer">
+          <EntitySet Name="allowance_summary" EntityType="Self.allowance_summary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mail_configuration" EntityType="Self.mail_configuration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payroll_mapping" EntityType="Self.payroll_mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personnel_info" EntityType="Self.personnel_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salary_change" EntityType="Self.salary_change" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="localdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="allowance_summary">
+          <Key>
+            <PropertyRef Name="PERSON_ID" />
+          </Key>
+          <Property Name="PERSON_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PAY_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PAY_CODE_DESC" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="AMT" Type="Decimal" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="START_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CURRENCY_CODE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="END_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FREQUENCY" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IS_ONCE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mail_configuration">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="Guid" Nullable="false" />
+          <Property Name="CODE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SmtpHost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SmtpPort" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailPass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payroll_mapping">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="Guid" Nullable="false" />
+          <Property Name="PAY_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PAY_CODE_DESC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personnel_info">
+          <Key>
+            <PropertyRef Name="PERSON_ID" />
+          </Key>
+          <Property Name="PERSON_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MIDDLE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CHINESE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ALIAS_NAME" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PERS_MOBILE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMPANY" Type="String" MaxLength="90" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PERS_EMAIL" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NATIONAL_ID" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LASTEST_HIRE_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SAL_AMT" Type="Double" Nullable="false" />
+          <Property Name="POSITION_TITLE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="WORK_LOCATION" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COST_CENTER" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ACTION" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="LAST_EMP_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TERM_REASON" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="WORKER_TYPE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="salary_change">
+          <Key>
+            <PropertyRef Name="PERSON_ID" />
+          </Key>
+          <Property Name="PERSON_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MIDDLE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CHINESE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ALIAS_NAME" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NATIONAL_ID" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COMPANY" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SAL_START_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SAL_AMT" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="localdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="allowance_summary" EntityType="Self.allowance_summary" />
+          <EntitySet Name="mail_configuration" EntityType="Self.mail_configuration" />
+          <EntitySet Name="payroll_mapping" EntityType="Self.payroll_mapping" />
+          <EntitySet Name="personnel_info" EntityType="Self.personnel_info" />
+          <EntitySet Name="salary_change" EntityType="Self.salary_change" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="localdbModelStoreContainer" CdmEntityContainer="localdbEntities">
+          <EntitySetMapping Name="allowance_summary">
+            <EntityTypeMapping TypeName="localdbModel.allowance_summary">
+              <MappingFragment StoreEntitySet="allowance_summary">
+                <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
+                <ScalarProperty Name="PAY_CODE" ColumnName="PAY_CODE" />
+                <ScalarProperty Name="PAY_CODE_DESC" ColumnName="PAY_CODE_DESC" />
+                <ScalarProperty Name="AMT" ColumnName="AMT" />
+                <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
+                <ScalarProperty Name="CURRENCY_CODE" ColumnName="CURRENCY_CODE" />
+                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+                <ScalarProperty Name="FREQUENCY" ColumnName="FREQUENCY" />
+                <ScalarProperty Name="IS_ONCE" ColumnName="IS_ONCE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mail_configuration">
+            <EntityTypeMapping TypeName="localdbModel.mail_configuration">
+              <MappingFragment StoreEntitySet="mail_configuration">
+                <ScalarProperty Name="GID" ColumnName="GID" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="SmtpHost" ColumnName="SmtpHost" />
+                <ScalarProperty Name="SmtpPort" ColumnName="SmtpPort" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="EmailPass" ColumnName="EmailPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payroll_mapping">
+            <EntityTypeMapping TypeName="localdbModel.payroll_mapping">
+              <MappingFragment StoreEntitySet="payroll_mapping">
+                <ScalarProperty Name="GID" ColumnName="GID" />
+                <ScalarProperty Name="PAY_CODE" ColumnName="PAY_CODE" />
+                <ScalarProperty Name="PAY_CODE_DESC" ColumnName="PAY_CODE_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personnel_info">
+            <EntityTypeMapping TypeName="localdbModel.personnel_info">
+              <MappingFragment StoreEntitySet="personnel_info">
+                <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+                <ScalarProperty Name="CHINESE_NAME" ColumnName="CHINESE_NAME" />
+                <ScalarProperty Name="ALIAS_NAME" ColumnName="ALIAS_NAME" />
+                <ScalarProperty Name="PERS_MOBILE" ColumnName="PERS_MOBILE" />
+                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+                <ScalarProperty Name="PERS_EMAIL" ColumnName="PERS_EMAIL" />
+                <ScalarProperty Name="NATIONAL_ID" ColumnName="NATIONAL_ID" />
+                <ScalarProperty Name="LASTEST_HIRE_DATE" ColumnName="LASTEST_HIRE_DATE" />
+                <ScalarProperty Name="SAL_AMT" ColumnName="SAL_AMT" />
+                <ScalarProperty Name="POSITION_TITLE" ColumnName="POSITION_TITLE" />
+                <ScalarProperty Name="WORK_LOCATION" ColumnName="WORK_LOCATION" />
+                <ScalarProperty Name="COST_CENTER" ColumnName="COST_CENTER" />
+                <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+                <ScalarProperty Name="LAST_EMP_DATE" ColumnName="LAST_EMP_DATE" />
+                <ScalarProperty Name="TERM_REASON" ColumnName="TERM_REASON" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="WORKER_TYPE" ColumnName="WORKER_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salary_change">
+            <EntityTypeMapping TypeName="localdbModel.salary_change">
+              <MappingFragment StoreEntitySet="salary_change">
+                <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+                <ScalarProperty Name="CHINESE_NAME" ColumnName="CHINESE_NAME" />
+                <ScalarProperty Name="ALIAS_NAME" ColumnName="ALIAS_NAME" />
+                <ScalarProperty Name="NATIONAL_ID" ColumnName="NATIONAL_ID" />
+                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+                <ScalarProperty Name="SAL_START_DATE" ColumnName="SAL_START_DATE" />
+                <ScalarProperty Name="SAL_AMT" ColumnName="SAL_AMT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

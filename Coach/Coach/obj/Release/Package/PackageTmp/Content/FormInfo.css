@@ -1,0 +1,61 @@
+﻿.k-pager-wrap > .k-link > .k-icon {
+    margin-top: 5px !important;
+}
+
+.k-i-arrow-60-down {
+    top: 5px !important;
+}
+
+#personnel-grid, #allowance-grid, #salary-grid, #onetime-grid, #resignation-grid {
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 2px;
+    /*margin-top: 1%;*/ 
+}
+
+.bt {
+    display: inline-block;
+    padding: 6px 9px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-top: 2%;
+    margin-left: 10px;
+    background-image: none,linear-gradient(to bottom,rgba(0,0,0,.01) 0,rgba(0,0,0,.08) 100%);
+    border: 1px solid #dbdbdb;
+    color: #676767;
+    background-color: #fff;
+    outline: none;
+}
+
+.bt-list {
+    width: 750px;
+    height: 69px;
+    left: 20%;
+    position: relative;
+    border: 1px solid #000;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 9px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-left: 10px;
+    background-image: none,linear-gradient(to bottom,rgba(0,0,0,.01) 0,rgba(0,0,0,.08) 100%);
+    border: 1px solid #dbdbdb;
+    color: #676767;
+    background-color: #fff;
+    outline: none;
+    margin: 2% 10px;
+}
+
+.btn:first-child {
+    margin-left: 20%;
+}
+
+.btn-list {
+    /*border: 1px solid black;*/
+    width: 100%;
+    height: 100px;
+}

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="localdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="allowance_summary">
+    <Key>
+      <PropertyRef Name="PERSON_ID" />
+      <PropertyRef Name="PAY_CODE" />
+      <PropertyRef Name="START_DATE" />
+      <PropertyRef Name="END_DATE" />
+    </Key>
+    <Property Name="PERSON_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PAY_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PAY_CODE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AMT" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="START_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CURRENCY_CODE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="END_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FREQUENCY" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IS_ONCE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="SYS_CREATE_DATE" Type="DateTime" Precision="3" />
+    <Property Name="WORK_LOCATION" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="WORKER_TYPE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="COMPANY" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="CHINESE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="NATIONAL_ID" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="mail_configuration">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="SmtpHost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SmtpPort" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailPass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="payroll_mapping">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="PAY_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="PAY_CODE_DESC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="personnel_info">
+    <Key>
+      <PropertyRef Name="PERSON_ID" />
+      <PropertyRef Name="NATIONAL_ID" />
+    </Key>
+    <Property Name="PERSON_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="LAST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="MIDDLE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="CHINESE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="ALIAS_NAME" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="PERS_MOBILE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="COMPANY" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="PERS_EMAIL" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="NATIONAL_ID" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="LASTEST_HIRE_DATE" Type="DateTime" Precision="3" />
+    <Property Name="SAL_AMT" Type="Double" />
+    <Property Name="POSITION_TITLE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="WORK_LOCATION" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="COST_CENTER" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="ACTION" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="LAST_EMP_DATE" Type="DateTime" Precision="3" />
+    <Property Name="TERM_REASON" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="WORKER_TYPE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="SYS_CREATE_DATE" Type="DateTime" Precision="3" />
+    <Property Name="COST_CENTER_DESC" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="salary_change">
+    <Key>
+      <PropertyRef Name="PERSON_ID" />
+      <PropertyRef Name="SAL_START_DATE" />
+    </Key>
+    <Property Name="PERSON_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="LAST_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="MIDDLE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="CHINESE_NAME" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="ALIAS_NAME" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="NATIONAL_ID" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="COMPANY" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="SAL_START_DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SAL_AMT" Type="Double" />
+    <Property Name="SYS_CREATE_DATE" Type="DateTime" Precision="3" />
+    <Property Name="WORK_LOCATION" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="WORKER_TYPE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="localdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="allowance_summary" EntityType="Self.allowance_summary" />
+    <EntitySet Name="mail_configuration" EntityType="Self.mail_configuration" />
+    <EntitySet Name="payroll_mapping" EntityType="Self.payroll_mapping" />
+    <EntitySet Name="personnel_info" EntityType="Self.personnel_info" />
+    <EntitySet Name="salary_change" EntityType="Self.salary_change" />
+  </EntityContainer>
+</Schema>

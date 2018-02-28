@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="localdbModelStoreContainer" CdmEntityContainer="localdbEntities">
+    <EntitySetMapping Name="allowance_summary">
+      <EntityTypeMapping TypeName="localdbModel.allowance_summary">
+        <MappingFragment StoreEntitySet="allowance_summary">
+          <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
+          <ScalarProperty Name="PAY_CODE" ColumnName="PAY_CODE" />
+          <ScalarProperty Name="PAY_CODE_DESC" ColumnName="PAY_CODE_DESC" />
+          <ScalarProperty Name="AMT" ColumnName="AMT" />
+          <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
+          <ScalarProperty Name="CURRENCY_CODE" ColumnName="CURRENCY_CODE" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+          <ScalarProperty Name="FREQUENCY" ColumnName="FREQUENCY" />
+          <ScalarProperty Name="IS_ONCE" ColumnName="IS_ONCE" />
+          <ScalarProperty Name="SYS_CREATE_DATE" ColumnName="SYS_CREATE_DATE" />
+          <ScalarProperty Name="WORK_LOCATION" ColumnName="WORK_LOCATION" />
+          <ScalarProperty Name="WORKER_TYPE" ColumnName="WORKER_TYPE" />
+          <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+          <ScalarProperty Name="CHINESE_NAME" ColumnName="CHINESE_NAME" />
+          <ScalarProperty Name="NATIONAL_ID" ColumnName="NATIONAL_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mail_configuration">
+      <EntityTypeMapping TypeName="localdbModel.mail_configuration">
+        <MappingFragment StoreEntitySet="mail_configuration">
+          <ScalarProperty Name="GID" ColumnName="GID" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="SmtpHost" ColumnName="SmtpHost" />
+          <ScalarProperty Name="SmtpPort" ColumnName="SmtpPort" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="EmailPass" ColumnName="EmailPass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payroll_mapping">
+      <EntityTypeMapping TypeName="localdbModel.payroll_mapping">
+        <MappingFragment StoreEntitySet="payroll_mapping">
+          <ScalarProperty Name="GID" ColumnName="GID" />
+          <ScalarProperty Name="PAY_CODE" ColumnName="PAY_CODE" />
+          <ScalarProperty Name="PAY_CODE_DESC" ColumnName="PAY_CODE_DESC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="personnel_info">
+      <EntityTypeMapping TypeName="localdbModel.personnel_info">
+        <MappingFragment StoreEntitySet="personnel_info">
+          <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
+          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+          <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+          <ScalarProperty Name="CHINESE_NAME" ColumnName="CHINESE_NAME" />
+          <ScalarProperty Name="ALIAS_NAME" ColumnName="ALIAS_NAME" />
+          <ScalarProperty Name="PERS_MOBILE" ColumnName="PERS_MOBILE" />
+          <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+          <ScalarProperty Name="PERS_EMAIL" ColumnName="PERS_EMAIL" />
+          <ScalarProperty Name="NATIONAL_ID" ColumnName="NATIONAL_ID" />
+          <ScalarProperty Name="LASTEST_HIRE_DATE" ColumnName="LASTEST_HIRE_DATE" />
+          <ScalarProperty Name="SAL_AMT" ColumnName="SAL_AMT" />
+          <ScalarProperty Name="POSITION_TITLE" ColumnName="POSITION_TITLE" />
+          <ScalarProperty Name="WORK_LOCATION" ColumnName="WORK_LOCATION" />
+          <ScalarProperty Name="COST_CENTER" ColumnName="COST_CENTER" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="LAST_EMP_DATE" ColumnName="LAST_EMP_DATE" />
+          <ScalarProperty Name="TERM_REASON" ColumnName="TERM_REASON" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="WORKER_TYPE" ColumnName="WORKER_TYPE" />
+          <ScalarProperty Name="SYS_CREATE_DATE" ColumnName="SYS_CREATE_DATE" />
+          <ScalarProperty Name="COST_CENTER_DESC" ColumnName="COST_CENTER_DESC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salary_change">
+      <EntityTypeMapping TypeName="localdbModel.salary_change">
+        <MappingFragment StoreEntitySet="salary_change">
+          <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
+          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+          <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+          <ScalarProperty Name="CHINESE_NAME" ColumnName="CHINESE_NAME" />
+          <ScalarProperty Name="ALIAS_NAME" ColumnName="ALIAS_NAME" />
+          <ScalarProperty Name="NATIONAL_ID" ColumnName="NATIONAL_ID" />
+          <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+          <ScalarProperty Name="SAL_START_DATE" ColumnName="SAL_START_DATE" />
+          <ScalarProperty Name="SAL_AMT" ColumnName="SAL_AMT" />
+          <ScalarProperty Name="SYS_CREATE_DATE" ColumnName="SYS_CREATE_DATE" />
+          <ScalarProperty Name="WORK_LOCATION" ColumnName="WORK_LOCATION" />
+          <ScalarProperty Name="WORKER_TYPE" ColumnName="WORKER_TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

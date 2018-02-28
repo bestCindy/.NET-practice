@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-cn" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>登录</title>
+    <link href="~/Content/login-style.css" rel="stylesheet" />
+    <link href="~/Content/login-font.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/Index.js" chsrset="utf-8"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head >
+
+<body onkeydown="keyLogin();">
+    <div class="container">
+        <div class="login-form">
+            <i class="iconfont usr">&#xe60c;</i>
+            <input id="userName" type="text">
+            <i class="iconfont pass">&#xe61f;</i>
+            <input id="pwd" type="password">
+            <input id="btn" type="button" value="登入" onclick="login()">
+        </div>
+    </div>
+</body>
+</html>

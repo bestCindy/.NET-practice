@@ -1,0 +1,593 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE>
+<html lang = "zh-cn">
+<head>
+    <title></title>
+    <meta charset="utf-8">   
+    <link href="~/Kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Kendo/styles/kendo.uniform.min.css" rel="stylesheet" />
+    <link href="~/Kendo/styles/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="~/Kendo/styles/kendo.silver.min.css" rel="stylesheet" />
+    <link href="~/Content/FormInfo.css" rel="stylesheet" />
+    <script src="~/Kendo/js/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/jquery.iframe-transport.js"></script>
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+    <script src="~/Scripts/FormInfo.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/ajaxfileupload.js"></script>
+    <script src="~/Kendo/js/kendo.mobile.min.js"></script>
+    <script src="~/Kendo/js/jszip.min.js"></script>
+    <script src="~/Kendo/js/kendo.all.min.js"></script>
+    <script src="~/Kendo/js/cultures/kendo.culture.zh-CN.min.js"></script>
+    <script src="~/Kendo/js/messages/kendo.messages.zh-CN.min.js"></script>
+    <script id="name-template" type="text/x-kendo-template">
+        <form id="fileform" enctype="multipart/form-data" style="display:inline;"><input class="k-button" type="file" name="filecon" id="filecon" /><input type="button" class="k-button" onclick="uploadFile()" value="上传文件" /></form>
+    </script>
+    <style>
+        .k-pager-wrap>.k-link>.k-icon{
+            margin-top: 7px !important;
+        }
+        .k-i-arrow-60-down {
+            top: 7px !important;
+        }
+        .k-i-calendar {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn-list">
+        <a class="btn" id="btn-personnel">新入职人员信息文件</a>
+        <a class="btn" id="btn-resignation">离职人员信息文件</a>
+        <a class="btn" id="btn-Onetime">一次性津贴信息文件</a>
+        <a class="btn" id="btn-allowance">固定津贴信息文件</a>
+        <a class="btn" id="btn-salary">薪资变动文件</a>   
+    </div>
+    @*新入职人员信息文件*@
+    <div id="personnel-info">
+        <div id="personnel-grid"></div> 
+    </div>  
+    @*固定津贴信息文件*@
+    <div id="fixed-allowance">
+        <div id="allowance-grid"></div>
+    </div>
+    @*离职人员信息文件*@
+    <div id="resignation-info">
+        <div id="resignation-grid"></div>
+    </div>
+    @*薪资变动文件*@
+    <div id="salary-change">
+        <div id="salary-grid"></div>
+    </div>
+    @*一次性津贴文件*@   
+    <div id="Onetime-allowance">
+        <div id="Onetime-grid"></div>
+    </div>
+    <script>      
+        $(document).ready(function () {
+            kendo.culture("zh-CN");
+            @*新入职人员信息文件*@
+            $('#btn-personnel').click(function () {
+                $('#personnel-info').fadeIn('300');
+                $('#fixed-allowance').hide();
+                $('#resignation-info').hide();
+                $('#salary-change').hide();
+                $('#Onetime-allowance').hide();
+            });
+            @*固定津贴信息文件*@
+            $('#btn-allowance').click(function () {
+                $('#personnel-info').hide();
+                $('#fixed-allowance').fadeIn('300');
+                $('#resignation-info').hide();
+                $('#salary-change').hide();
+                $('#Onetime-allowance').hide();
+            });
+            @*离职人员信息文件*@
+            $('#btn-resignation').click(function () {
+                $('#personnel-info').hide();
+                $('#fixed-allowance').hide();
+                $('#resignation-info').fadeIn('300');
+                $('#salary-change').hide();
+                $('#Onetime-allowance').hide();
+            });
+            @*薪资变动文件*@
+            $('#btn-salary').click(function () {
+                $('#personnel-info').hide();
+                $('#fixed-allowance').hide();
+                $('#resignation-info').hide();
+                $('#salary-change').fadeIn('300');
+                $('#Onetime-allowance').hide();
+            });
+            @*一次性津贴文件*@
+            $('#btn-Onetime').click(function () {
+                $('#personnel-info').hide();
+                $('#fixed-allowance').hide();
+                $('#resignation-info').hide();
+                $('#salary-change').hide();
+                $('#Onetime-allowance').fadeIn('300');
+            });
+            @*新入职人员信息文件*@
+            $('#personnel-grid').kendoGrid({
+                filterable: true,//每列都过滤           
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: '/FormInfo/getPersonnelInfo',
+                            dataType: 'JSON'
+                        },
+                    },
+                    schema: {
+                        model: {
+                            id: 'PERSON_ID',
+                            id: 'NATIONAL_ID',
+                            fields: {
+                                COMPANY: { type: 'string' },
+                                WORKER_TYPE: { TYPE: 'string' },
+                                CHINESE_NAME: { type: 'string' },
+                                PERSON_ID: { type: 'string' },
+                                ALIAS_NAME: { type: 'string' },
+                                NATIONAL_ID: { type: 'string' },
+                                PERS_MOBILE: { type: 'string' },
+                                PERS_EMAIL: { type: 'string' },
+                                LASTEST_HIRE_DATE: { type: 'date' },
+                                POSITION_TITLE: { type: 'string' },
+                                SAL_AMT: { type: 'number' },
+                                WORK_LOCATION: { type: 'string' }
+                            }
+                        }
+                    },
+                    pageSize: 20//一页20条数据
+                },
+                toolbar: [
+                    { name: 'excel', text: '导出文件' },
+                    { template: '<button class="k-button" onclick="PersonnelSentMail()" style="margin-left:10px;margin-right:4px;">邮件重发</button>' },
+                    { template: '<input id="personnelDate-start" placeholder="开始日期" style="width:135px;margin-right:4px;" />' },
+                    { template: '<input id="personnelDate-end" placeholder="结束日期" style="width:135px;margin-right:10px" />' },
+                    { template: kendo.template($("#name-template").html()) }
+                ],
+                excel: {
+                    allPages: true,
+                    fileName: 'PersonnelInfo.xlsx'
+                },
+                sortable: true,//排序
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttoncount: 4,
+                    messages: {
+                        empty: "没有数据"
+                    }
+                },
+                columns: [{
+                    field: 'COMPANY',
+                    title: '公司名称',
+                    width: 140
+                }, {
+                    field: 'WORKER_TYPE',
+                    title: '工作类型',
+                    width: 130
+                }, {
+                    field: 'CHINESE_NAME',
+                    title: '中文姓名',
+                    width: 150
+                }, {
+                    field: 'PERSON_ID',
+                    title: 'Coach工号',
+                    width: 130
+                }, {
+                    field: 'ALIAS_NAME',
+                    title: '英文名',
+                    width: 110
+                }, {
+                    field: 'NATIONAL_ID',
+                    title: '身份证',
+                    width: 140
+                }, {
+                    field: 'PERS_MOBILE',
+                    title: '手机',
+                    width: 140
+                }, {
+                    field: 'PERS_EMAIL',
+                    title: 'Email',
+                    width: 140
+                }, {
+                    field: 'LASTEST_HIRE_DATE',
+                    title: '合同开始日期',
+                    format: '{0: yyyy-MM-d HH:mm}'
+                }, {
+                    field: 'POSITION_TITLE',
+                    title: '工作岗位',
+                    width: 130
+                }, {
+                    field: 'SAL_AMT',
+                    title: '工资',
+                    width: 100
+                }, {
+                    field: 'WORK_LOCATION',
+                    title: '工作所在地'
+                }],
+                height: 630
+            });
+            //离职人员信息文件
+            $('#resignation-grid').kendoGrid({
+                filterable: true,
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: '/FormInfo/getResignationInfo',
+                            dataType: 'JSON'
+                        },
+                    },
+                    schema: {
+                        model: {
+                            id: 'PERSON_ID',
+                            id: 'NATIONAL_ID',
+                            fields: {
+                                PERSON_ID: { type: 'string' },
+                                TERM_REASON: { type: 'string' },
+                                CHINESE_NAME: { type: 'string' },
+                                NATIONAL_ID: { type: 'string' },
+                                LAST_EMP_DATE: { type: 'date' },
+                                DEPARTMENT: { type: 'string' }
+                            }
+                        }
+                    },
+                    pageSize: 20
+                },
+                toolbar: [
+                    { name: 'excel', text: '导出文件' },
+                    { template: '<button class="k-button" onclick="ResignationSentMail()">邮件重发</button>' },
+                    { template: '<input id="resignationDate-start" placeholder="开始日期" style="width:135px; margin-right:2px" />' },
+                    { template: '<input id="resignationDate-end" placeholder="结束日期" style="width:135px" />' },
+                    { template: kendo.template($("#name-template").html()) }
+                ],
+                excel: {
+                    allPages: true,
+                    fileName: 'ResignationInfo.xlsx'
+                },
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttoncount: 4,
+                    messages: {
+                        empty: "没有数据"
+                    }
+                },
+                columns: [{
+                    field: 'PERSON_ID',
+                    title: '工号'
+                }, {
+                    field: 'TERM_REASON',
+                    title: '离职原因'
+                }, {
+                    field: 'CHINESE_NAME',
+                    title: '中文姓名'
+                }, {
+                    field: 'NATIONAL_ID',
+                    title: '身份证'
+                }, {
+                    field: 'LAST_EMP_DATE',
+                    title: '最后工作日',
+                    format: '{0: yyyy-MM-d HH:mm}'
+                }, {
+                    field: 'DEPARTMENT',
+                    title: '部门'
+                }],
+                height: 630
+            });
+            //一次性津贴文件  
+            $('#Onetime-grid').kendoGrid({
+                filterable: true,
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: '/FormInfo/getOnetimeAllowance',
+                            dataType: 'JSON'
+                        },
+                    },
+                    schema: {
+                        model: {
+                            id: 'person_id',
+                            id: 'pay_code',
+                            id: 'start_date',
+                            fields: {
+                                COMPANY: { type: 'string' },
+                                WORKER_TYPE: { type: 'string' },
+                                WORK_LOCATION: { type: 'string' },
+                                PERSON_ID: { type: 'string' },
+                                CHINESE_NAME: { type: 'string' },
+                                NATIONAL_ID: { type: 'string' },
+                                PAY_CODE: { type: 'string' },
+                                PAY_CODE_DESC: { type: 'string' },
+                                AMT: { type: 'string' },
+                                START_DATE: { type: 'date' },
+                                CURRENCY_CODE: { type: 'string' }
+                            }
+                        }
+                    },
+                    pageSize: 20
+                },
+                toolbar: [
+                    { name: 'excel', text: '导出文件' },
+                    { template: '<button class="k-button" onclick="OnetimeSentMail()">邮件重发</button>' },
+                    { template: '<input id="OnetimeDate-start" placeholder="开始日期" style="width:135px; margin-right:2px" />' },
+                    { template: '<input id="OnetimeDate-end" placeholder="结束日期" style="width:135px" />' },
+                    { template: kendo.template($("#name-template").html()) }
+                ],
+                excel: {
+                    allPages: true,
+                    fileName: 'OnetimeAllowance.xlsx'
+                },
+                scrollable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttoncount: 4,
+                    messages: {
+                        empty: "没有数据"
+                    }
+                },
+                columns: [{
+                    field: 'COMPANY',
+                    title: '公司名称'
+                }, {
+                    field: 'WORKER_TYPE',
+                    title: '工作类型'
+                }, {
+                    field: 'WORK_LOCATION',
+                    title: '工作所在地'
+                }, {
+                    field: 'PERSON_ID',
+                    title: 'COACH人员编号'
+                }, {
+                    field: 'CHINESE_NAME',
+                    title: '员工中文名'
+                }, {
+                    field: 'NATIONAL_ID',
+                    title: '证件号码'
+                }, {
+                    field: 'PAY_CODE',
+                    title: '一次性津贴代码'
+                }, {
+                    field: 'PAY_CODE_DESC',
+                    title: '一次性津贴代码描述'
+                }, {
+                    field: 'AMT',
+                    title: '薪资值'
+                }, {
+                    field: 'START_DATE',
+                    title: '开始时间',
+                    format: '{0: yyyy-MM-d HH:mm}'
+                }, {
+                    field: 'CURRENCY_CODE',
+                    title: '币种代码'
+                }],
+                height: 630
+            });
+            //固定津贴信息文件
+            $('#allowance-grid').kendoGrid({
+                filterable: true,
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: '/FormInfo/getFixedAllowance',
+                            dataType: 'JSON'
+                        },
+                    },
+                    schema: {
+                        model: {
+                            id: 'PERSON_ID',
+                            id: 'PAY_CODE',
+                            id: 'START_DATE',
+                            id: 'END_DATE',
+                            fields: {
+                                COMPANY: { type: 'string' },
+                                WORKER_TYPE: { type: 'string' },
+                                WORK_LOCATION: { type: 'string' },
+                                PERSON_ID: { type: 'string' },
+                                CHINESE_NAME: { type: 'string' },
+                                NATIONAL_ID: { type: 'string' },
+                                PAY_CODE: { type: 'string' },
+                                PAY_CODE_DESC: { type: 'string' },
+                                AMT: { type: 'number' },
+                                START_DATE: { type: 'date' },
+                                END_DATE: { type: 'date' },
+                                FREQUENCY: { type: 'number' },
+                                CURRENCY_CODE: { type: 'string' }
+                            }
+                        }
+                    },
+                    pageSize: 20
+                },
+                toolbar: [
+                    { name: 'excel', text: '导出文件' },
+                    { template: '<button class="k-button" onclick="FixedSentMail()">邮件重发</button>' },
+                    { template: '<input id="fixedDate-start" placeholder="开始日期" style="width:135px; margin-right:2px" />' },
+                    { template: '<input id="fixedDate-end" placeholder="结束日期" style="width:135px" />' },
+                    { template: kendo.template($("#name-template").html())}
+                ],
+                excel: {
+                    allPages: true,
+                    fileName: 'FixedAllowance.xlsx'
+                },
+                scrollable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttoncount: 4,
+                    messages: {
+                        empty: "没有数据"
+                    }
+                },
+                columns: [{
+                    field: 'COMPANY',
+                    title: '公司名称（含描述）'
+                }, {
+                    field: 'WORKER_TYPE',
+                    title: '工作类型（WORKER_TYPE）'
+                }, {
+                    field: 'WORK_LOCATION',
+                    title: '工作所在地'
+                }, {
+                    field: 'PERSON_ID',
+                    title: 'COACH人员编号'
+                }, {
+                    field: 'CHINESE_NAME',
+                    title: '员工中文名'
+                }, {
+                    field: 'NATIONAL_ID',
+                    title: '证件号码'
+                }, {
+                    field: 'PAY_CODE',
+                    title: '固定津贴薪资代码'
+                }, {
+                    field: 'PAY_CODE_DESC',
+                    title: '固定津贴薪资代码描述'
+                }, {
+                    field: 'AMT',
+                    title: '薪资值'
+                }, {
+                    field: 'START_DATE',
+                    title: '开始时间',
+                    format: '{0: yyyy-MM-d HH:mm}'
+                }, {
+                    field: 'END_DATE',
+                    title: '结束时间',
+                    format: '{0: yyyy-MM-d HH:mm}'
+                }, {
+                    field: 'FREQUENCY',
+                    title: '频率，发放周期'
+                }, {
+                    field: 'CURRENCY_CODE',
+                    title: '币种代码'
+                }],
+                height: 630
+            });
+            //薪资变动文件
+            $('#salary-grid').kendoGrid({
+                filterable: true,
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: '/FormInfo/getSalaryChange',
+                            dataType: 'JSON',
+                        },
+                    },
+                    schema: {
+                        model: {
+                            id: 'PERSON_ID',
+                            fields: {
+                                COMPANY: { type: 'string' },
+                                WORKER_TYPE: { type: 'string' },
+                                WORK_LOCATION: { type: 'string' },
+                                PERSON_ID: { type: 'string' },
+                                CHINESE_NAME: { type: 'string' },
+                                NATIONAL_ID: { type: 'string' },
+                                SAL_START_DATE: { type: 'date' },
+                                SAL_AMT: { type: 'string' },
+                                CURRENCY_CODE: { type: 'string' }
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                },
+                toolbar: [
+                       { name: 'excel', text: '导出文件' },
+                       { template: '<button class="k-button" onclick="SalarySentMail()">邮件重发</button>' },
+                       { template: '<input id="salaryDate-start" placeholder="开始日期" style="width:135px; margin-right:2px" />' },
+                       { template: '<input id="salaryDate-end" placeholder="结束日期" style="width:135px" />' },
+                       { template: kendo.template($("#name-template").html())}
+                ],
+                excel: {
+                    allPages: true,
+                    fileName: 'SalaryChange.xlsx',
+                },
+                scrollable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttoncount: 4,
+                    messages: {
+                        empty: "没有数据"
+                    }
+                },
+                columns: [{
+                    field: 'COMPANY',
+                    title: '公司名称'
+                }, {
+                    field: 'WORKER_TYPE',
+                    title: '工作类型'
+                }, {
+                    field: 'WORK_LOCATION',
+                    title: '工作所在地'
+                }, {
+                    field: 'PERSON_ID',
+                    title: 'COACH人员编号'
+                }, {
+                    field: 'CHINESE_NAME',
+                    title: '员工中文名'
+                }, {
+                    field: 'NATIONAL_ID',
+                    title: '证件号码'
+                }, {
+                    field: 'SAL_START_DATE',
+                    title: '薪资变动开始日',
+                    format: '{0: yyyy-MM-d HH:mm}',
+                    width: 200
+                }, {
+                    field: 'SAL_AMT',
+                    title: '变动后薪资'
+                }, {
+                    field: 'CURRENCY_CODE',
+                    title: '币种代码'
+                }],
+                height: 630
+            });
+            //datepicker
+            $('#personnelDate-start').kendoDatePicker({
+                animation: false
+            });
+            $('#personnelDate-end').kendoDatePicker({
+                animation: false
+            });
+            $('#resignationDate-start').kendoDatePicker({
+                animation: false
+            });
+            $('#resignationDate-end').kendoDatePicker({
+                animation: false
+            });
+            $('#OnetimeDate-start').kendoDatePicker({
+                animation: false
+            });
+            $('#OnetimeDate-end').kendoDatePicker({
+                animation: false
+            });
+            $('#fixedDate-start').kendoDatePicker({
+                animation: false
+            });
+            $('#fixedDate-end').kendoDatePicker({
+                animation: false
+            });
+            $('#salaryDate-start').kendoDatePicker({
+                animation: false
+            });
+            $('#salaryDate-end').kendoDatePicker({
+                animation: false
+                  });
+            $('#personnel-info').show();
+            $('#fixed-allowance').hide();
+            $('#resignation-info').hide();
+            $('#salary-change').hide();
+            $('#Onetime-allowance').hide(); 
+        });
+    </script>  
+</body>
+</html>
+ 

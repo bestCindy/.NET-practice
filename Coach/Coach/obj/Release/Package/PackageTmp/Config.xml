@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <SMTP>
+    <Groups>
+      <Group Name="TestUsers">
+        <MailTo>xinyu.wang@fsg.com.cn</MailTo>
+        <CCTo>xinyu.wang@fsg.com.cn</CCTo>
+        <!--<CCTo>ning.lu@fsg.com.cn</CCTo>-->
+        <MSGTo>13761120843</MSGTo>
+      </Group>
+    </Groups>
+    <AttachmentsFolder>d:\</AttachmentsFolder>
+    <SecurityType>无</SecurityType>
+    <SmtpHost>mail.fsg.com.cn</SmtpHost>
+    <SmtpPort>25</SmtpPort>
+    <EmailAddress>xinyu.wang@fsg.com.cn</EmailAddress>
+    <Connection></Connection>
+    <Signature>测试邮件</Signature>
+    <EmailPass>MTk5NSx3YW5n</EmailPass>
+  </SMTP>
+</Config>
